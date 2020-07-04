@@ -1,5 +1,7 @@
 # ecoCTD Open Project
 
-## Project Descriptionà
+![EcoCTD setup](IMG_7712.jpg)
+
+## Project Description
 
 ## Resources
