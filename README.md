@@ -1,9 +1,12 @@
-<!-- background: #574c4f -->
+<!-- background: #000000 -->
 
 # ecoCTD Open Project
 
-![EcoCTD setup](IMG_7712.jpg)
+![EcoCTD setup](images/EcoCTD_logo.png)
 
 ## Project Description
 
 ## Resources
+
+
+© Graphic design by Anneka Siegel
