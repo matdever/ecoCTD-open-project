@@ -4405,7 +4405,17 @@ h6.center
 }.welcome .wrapper strong
 {
     font-weight: 500;padding: 0 .2em;color: #98c3b7;background-color: #393c3c;
-}.welcome .column
+}.welcome .narrowcolumn
+{
+    width: 33%;
+    margin: 0px;
+}
+.welcome .widecolumn
+{
+    width: 66%;
+    margin: 0px;
+}
+.welcome .column
 {
     width: 50%;
 }.welcome .columns .column:first-child
