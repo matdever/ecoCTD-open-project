@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>EcoCTD Open Project</title>
+  <!-- <link rel="stylesheet" media="all" href="https://github-atom-io-herokuapp-com.freetls.fastly.net/assets/application-3cb78c62c5521ca313c78178e3e82ccb1695af1c72a01a79d82ac9fadcbdec6c.css" data-turbolinks-track="true"> -->
+  <link rel="stylesheet" media="all" href="navbarstyle_clean.css" data-turbolinks-track="true">
+  <script>
+  function imageZoom(imgID, resultID) {
+    var img, lens, result, cx, cy;
+    img = document.getElementById(imgID);
+    result = document.getElementById(resultID);
+    /*create lens:*/
+    lens = document.createElement("DIV");
+    lens.setAttribute("class", "img-zoom-lens");
+    /*insert lens:*/
+    img.parentElement.insertBefore(lens, img);
+    /*calculate the ratio between result DIV and lens:*/
+    cx = result.offsetWidth / lens.offsetWidth;
+    cy = result.offsetHeight / lens.offsetHeight;
+    /*set background properties for the result DIV:*/
+    result.style.backgroundImage = "url('" + img.src + "')";
+    result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+    /*execute a function when someone moves the cursor over the image, or the lens:*/
+    lens.addEventListener("mousemove", moveLens);
+    img.addEventListener("mousemove", moveLens);
+    /*and also for touch screens:*/
+    lens.addEventListener("touchmove", moveLens);
+    img.addEventListener("touchmove", moveLens);
+    function moveLens(e) {
+      var pos, x, y;
+      /*prevent any other actions that may occur when moving over the image:*/
+      e.preventDefault();
+      /*get the cursor's x and y positions:*/
+      pos = getCursorPos(e);
+      /*calculate the position of the lens:*/
+      x = pos.x - (lens.offsetWidth / 2);
+      y = pos.y - (lens.offsetHeight / 2);
+      /*prevent the lens from being positioned outside the image:*/
+      if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+      if (x < 0) {x = 0;}
+      if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+      if (y < 0) {y = 0;}
+      /*set the position of the lens:*/
+      lens.style.left = x + "px";
+      lens.style.top = y + "px";
+      /*display what the lens "sees":*/
+      result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+    }
+    function getCursorPos(e) {
+      var a, x = 0, y = 0;
+      e = e || window.event;
+      /*get the x and y positions of the image:*/
+      a = img.getBoundingClientRect();
+      /*calculate the cursor's x and y coordinates, relative to the image:*/
+      x = e.pageX - a.left;
+      y = e.pageY - a.top;
+      /*consider any page scrolling:*/
+      x = x - window.pageXOffset;
+      y = y - window.pageYOffset;
+      return {x : x, y : y};
+    }
+  }
+  </script>
+</head>
+
+<body class="is-responsive">
+  <div class="footer-push">
+    <nav class="top-bar" aria-label="Primary">
+      <div class="wrapper no-pad">
+        <ul class="navigation">
+          <li><a href="./index.html"><img src="images/EcoCTD_logo.png" height="30" width="28"/></a></li>
+          <li><a class="" href="./Project_Description">EcoCTD Open Project</a></li>
+          <li><a class="" href="./data.html">Data Example</a></li>
+          <li><a class="" href="./getone.html">Get your own EcoCTD</a></li>
+          <li><a href="./docs.html">Publications and reports</a></li>
+        </ul>
+
+        <div class="top-bar-right">
+          <!--<a href="/login?last_url=%2F">
+          <span> Contact</span>
+          </a>-->
+        </div>
+      </div>
+    </nav>
+
+    <div id="js-pjax-container">
+      <div class="welcome">
+
+        <section>
+          <a name="contact"></a>
+          <div class="wrapper no-pad">
+            <div class="sectiontitle">How can I get an EcoCTD? </div>
+            <h4>You can make one yourself! The EcoCTD Open Project aims at providing all the knowledge and resources necessary to make an EcoCTD yourself. Below is a list of the supplies you will need, along with approximate costs. It also includes 3D design file of key parts of the EcoCTD (e.g., clamps, housing).</h4>
+            <br>
+            <h4>If you do not feel comfortable building and assembling the EcoCTD yourself, please <a href="mailto: mdever@whoi.edu?subject=EcoCTD help">reach out to us</a>, we would be happy to help!</h4>
+
+            <div>
+                <img src="images/shopping_list.jpg" style="max-width: 600px; padding-left: 100px">
+            </div>
+
+            <h3> Sensors </h3>
+            <p>This is the most expensive part of the design, one we have no control over. The EcoCTD is designed around three types of sensors:</p>
+            <ol>
+              <li style="padding-bottom: 1em">A <a class="" href="https://rbr-global.com/products">RBR<i>Concerto</i><sup>3</sup></a>. It acts as both a CTD and a logger, conveniently syncing the different sensors integrated into the EcoCTD. We recommend getting the guard that protects the CTD (very practical!), and a fast thermistor as the EcoCTD profiles at high speed (3-4 m/s). Our default configuration includes a fast thermistor, a sampling rate of 8Hz, and a pressure sensor rated to 750 m. We also often get a connectorized end-cap to facilitate data download, although the RBR<i>Concerto</i><sup>3</sup> can have Wi-Fi capabilities for a cost. RBR has quoted us a few of these systems, and they will be able to help you get the right sensors!
+                <br>
+              <li style="padding-bottom: 1em">An Optical Dissolved Oxygen (ODO) sensor. The EcoCTD can accomodate both the <a class="" href="https://www.jfe-advantech.co.jp/eng/ocean/rinko/rinko3.html"> JFE Rinko III</a>, or the <a class="" href="https://rbr-global.com/products/sensors">RBR<i>coda</i><sup>3</sup> T.ODO</a>. Both sensors include fast-response foils for profiling applications, which is needed for the EcoCTD. Just make sure that the logger also records the temperature as measured by the ODO, it will make data processing more robust, and can act as a back-up thermistor in case of instrument failure.</li>
+              <li>An <a class ="" href="https://www.seabird.com/auv-rov-sensors/eco-puck/family?productCategoryId=55352274651">ECOPuck</a> optical backscatter and chlorophyll sensor. There is great flexibility on the channels that can be selected for the ECOPuck. We traditionally select Chlorophyll-fluorescence, and backscatter at 470 and 700 nm. We also selected a rhodamine channel in the past, for dye-tracing experiments. These should be selected to suit your research objectives best.</li>
+            </ol>
+
+            <h3> Clamps and housing</h3>
+            The latest design of the clamps and housing required to assemble an EcoCTD are inluded in the up-to-date <a href="https://github.com/matdever/ecoCTD-open-project/releases/tag/2.2">GitHub release</a>. It includes both the EcoCTD's housing, made of stainless steel aluminium, and clamps to secure the sensors to the housing. Clamps are typically made of Delrin plastic (ABS), but could also be 3D printed to save cost. Plastic is also recommended for the weight collars, as it provides the additional flexibility to easily install them on the housing tube. The most recent design includes:
+            <div class="img-zoom-container">
+              <img id="myimage" src="images/EcoCTD_rendering_v1.png" style="max-width: 600px; padding-left: 100px">
+              <!-- <div id="myresult" class="img-zoom-result"></div> */ -->
+            </div>
+
+            <ul>
+              <li> A lower tube containing the RBR<i>Concerto</i><sup>3</sup>.</li>
+              <li> An upper tube containing the bio-optical sensors (ODO and ECOPuck).</li>
+              <li> A top end, providing the mechanical coupling with the UCTD adapter (see nomenclature below) winch.</li>
+              <li> 2 weight collars (yellow in figure below) that contains the lead shots and adds weight to the EcoCTD for fast, free-falling profiling.</li>
+              <li> 2 RBR clamps (orange in figure below) to attach the RBR<i>Concerto</i><sup>3</sup> to the housing.</li>
+              <li> 1 Union clamp (green in figure below) to link the lower and upper tubes.</li>
+              <li> 1 ODO clamp (purple in figure below) to attach the ODO to the housing. This has different designs based on the ODO selected (see abobve).</li>
+              <li> 1 ECOPuck clamp (pink in figure below) to attach the ECOPuck to the housing.</li>
+            </ul>
+
+
+
+
+            <h3> Hardware</h3>
+            <ul>
+              <li>30 lbs of lead shots (<a class="" href="https://www.mcmaster.com/9030K21/">like this</a> ~$257)</li>
+              <li>20x Socket Head Screw, 1/4"-20 Thread Size, 1" Long (<a class="" href="https://www.mcmaster.com/92185A542/">like this</a> ~$7)</li>
+              <li>75x Phillips Flat Head Screws, 1/4"-20 Thread Size, 3/4" Long (<a class="" href="https://www.mcmaster.com/91500A540/">like this</a> ~$22)</li>
+              <li>10x Phillips Flat Head Screws, 10-32 Thread Size, 1-1/2" Long (<a class="" href="https://www.mcmaster.com/91500A836/">like this</a> ~$5)</li>
+              <li>50x Steel Nylon-Insert Locknut, 10-32 Thread Size (<a class="" href="https://www.mcmaster.com/90715A115/">like this</a> ~$9)</li>
+              <li>200 mL West System 206 Slow Hardener (<a class="" href="https://www.mcmaster.com/7480A43/">like this</a> ~$26)</li>
+              <li>1 L West System 105 Resin (<a class="" href="https://www.mcmaster.com/7480A41/">like this</a> ~$49)</li>
+            </ul>
+
+
+            <h3> Tools</h3>
+            <ul>
+              <li>Long-Reach General Purpose Tap, 1/4"-20 Thread Size, 1" Thread Length (<a class="" href="https://www.mcmaster.com/2582A31/">like this one</a> ~$36), and its handle (<a class="" href="https://www.mcmaster.com/25605A67/">like this</a> ~$11)</li>
+              <li>1 Drill</li>
+              <li>1 set of hex-keys</li>
+              <li>1 Phillips screwdriver</li>
+              <li>1 kitchen scale</li>
+              <li>15 L ultrasonic cleaner bath (optional)</li>
+            </ul>
+
+            <h3>Instructions</h3>
+            <ol>
+              <li style="padding-bottom: 1em">Order your instruments with <a href="https://rbr-global.com/about-rbr/contact-rbr">RBR</a>. Lead times can be quite long and you should be aware that instrument delivery might take a few months.</li>
+              <li style="padding-bottom: 1em">Order the necessary hardware listed above. <a class="" href="https://www.mcmaster.com/">McMaster-carr</a> is the go-to in North America.</li>
+              <li style="padding-bottom: 1em"> Manufacture the clamps: We have explored many different options to reduce costs. We first had them produced by a US company called <a href="https://www.protolabs.com/">Protolabs</a>, which provides good quality CNC machining. Products were good but quotes were often expensive. We are currently experimenting with 3D printed clamps, which are significantly cheaper to produce. The <a href="https://www.protolabs.com/">3DHubs</a> online platform could be a good resource if you do not have easily access to a 3D printer.</li>
+              <li style="padding-bottom: 1em">Manufacture the housing: This remains the most expensive part of the EcoCTD, as it is made of stainless steel. Often quoted around $3,000USD (+/- $1,000), it provides the robusteness of the EcoCTD, and additional weight to ensure a fast fall-rate. We plan to experiment with 3D printed tubes made of plastic in the future, but uncertainties remain on how that would perform under pressure and during deployment/recovery of the EcoCTD.</li>
+              <li style="padding-bottom: 1em"> Manufacture the clamps: We have explored many different options to reduce costs. We first had them produced by a US company called <a href="https://www.protolabs.com/">Protolabs</a>, which provides good quality CNC machining. Products were good but quotes were often expensive. We are currently experimenting with 3D printed clamps, which are significantly cheaper to produce. The <a href="https://www.protolabs.com/">3DHubs</a> online platform could be a good resource if you do not have easily access to a 3D printer.</li>
+              <li style="padding-bottom: 1em">Once you received the clamps, tap the different holes to the proper thread size of the screws. Tapping holes in plastic is relatively easy: We advise to first drill a drive hole, then tap the hole, and finally test it with the proper screw. The proper size of the drill bit and tap to use can be found in summary charts <a href="https://www.lincolnmachine.com/tap_drill_chart.html">like this one</a>.</li>
+              <div style="padding-left: 100px; padding-right: 100px">
+                <img src="images/Tap_hole.jpg" style="max-width: 176px; border: 1px solid #d4d4d4">
+              </div>
+              <li style="padding-bottom: 1em">Assemble the weight-collars: To add weight to the EcoCTD and ensure a fast profiling speed, we add two weigth collars to the housing, each weighing ~2.35 kg. You can use a kitchen scale to measure how much lead shots are required to reach the target weight. Lead shots are poured into the hollow part of the collars, which are then filled with epoxy to secure the lead shots together. This has proven to work quite well, and provides flexibility on the weight added to the EcoCTD, thus tuning the instrument fall-rate, along with the data vertical resolution. We find that pouring the epoxy onto the lead shots is best done while the collars are sitting in an ice bath in an ultrasonic cleaner. The ice bath prevents the exothermic reaction to provide too much heat, while the ultrasonic cleaner helps getting rid of small air bubbles that would compromise the integrity of the epoxy (see pictures below). This is not required, but provides very good and robust weigth collars.</li>
+              <div style="padding-left: 100px; padding-right: 100px">
+                <img src="images/weigth_collar_scale.jpg" style="max-width: 176px; border: 1px solid #d4d4d4">
+                <img src="images/weight_collars_icebath2.jpg" style="max-width: 200px; border: 1px solid #d4d4d4">
+                <img src="images/weight_collars_done.jpg" style="max-width: 220px; border: 1px solid #d4d4d4">
+              </div>
+              <li>Put everything together!
+                <ul>
+                  <li>Start by placing the RBR clamps on the CTD, one near the end-cap, and one between the CTD and the external connectors. It requires a bit of fiddling to align the holes with the housing.</li>
+                  <li>Install the ODO in the upper tube first. Pay attention to how your cables are going to be organized and fed through the clamps, especially for the ECOPuck.</li>
+                  <li>Install the ECOPuck in the upper tube. If you are using a connectorized end-cap, a patch cable for data download needs access to the hole in the top end part of the housing, and the UCTD adatper.</li>
+                </ul>
+              </li>
+              <li> Test the instruments. You will likely bend cables and pull on things as you assemble the EcoCTD. It is wise to take the time to test the EcoCTD once built, in air or in water.</li>
+            </ol>
+
+            Any questions? <a href="mailto: mdever@whoi.edu?subject=EcoCTD help">Contact us !</a>
+          </div>
+        </section>
+
+
+
+      <div class="footer-pad"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer">
+      <div class="wrapper no-pad">
+        <ul class="footer-left">
+          <li><a href="/people">Who are we?</a></li>
+          <li><a href="mailto: mdever@whoi.edu">Contact</a></li>
+          <li><a href="funding.html">Funding sources</a></li>
+          <li><a href="https://github.com/matdever/ecoCTD-open-project/releases">Releases</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // Initiate zoom effect:
+  imageZoom("myimage", "myresult");
+  </script>
+
+</body>
+
+</html>
