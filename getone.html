@@ -151,7 +151,7 @@
               <li>15 L ultrasonic cleaner bath (optional)</li>
             </ul>
 
-            <h3>Instructions</h3>
+            <h3>Manufacturing instructions</h3>
             <ol>
               <li style="padding-bottom: 1em">Order your instruments with <a href="https://rbr-global.com/about-rbr/contact-rbr">RBR</a>. Lead times can be quite long and you should be aware that instrument delivery might take a few months.</li>
               <li style="padding-bottom: 1em">Order the necessary hardware listed above. <a class="" href="https://www.mcmaster.com/">McMaster-carr</a> is the go-to in North America.</li>
@@ -177,6 +177,11 @@
               </li>
               <li> Test the instruments. You will likely bend cables and pull on things as you assemble the EcoCTD. It is wise to take the time to test the EcoCTD once built, in air or in water.</li>
             </ol>
+
+            <h3>Assembling instructions</h3>
+            <p>An up-to-date user guide is maintain in <a href="https://github.com/matdever/EcoCTD_User_guide">a GitHub repository</a></p>
+
+            <div id="example1"></div>
 
             Any questions? <a href="mailto: mdever@whoi.edu?subject=EcoCTD help">Contact us !</a>
           </div>
@@ -205,7 +210,15 @@
   // Initiate zoom effect:
   imageZoom("myimage", "myresult");
   </script>
+  <!-- insert just before the closing body tag </body> -->
+  <script src='/javacripts/pdfobject.js'></script>
+  <script>
+  var options = {
+     fallbackLink: '<p>This browser does not support inline PDFs. Please download the PDF to view it: <a href="https://github.com/matdever/EcoCTD_User_guide">Download PDF</a></p>'
+  };
 
+  PDFObject.embed("https://github.com/matdever/EcoCTD_User_guide/blob/master/main.pdf", "#example1", false, options);
+  </script>
 </body>
 
 </html>
