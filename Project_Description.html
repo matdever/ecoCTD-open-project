@@ -5,28 +5,6 @@
   <title>EcoCTD Open Project</title>
   <!-- <link rel="stylesheet" media="all" href="https://github-atom-io-herokuapp-com.freetls.fastly.net/assets/application-3cb78c62c5521ca313c78178e3e82ccb1695af1c72a01a79d82ac9fadcbdec6c.css" data-turbolinks-track="true"> -->
   <link rel="stylesheet" media="all" href="navbarstyle_clean.css" data-turbolinks-track="true">
-  <script>
-  // Get the modal
-  var modal = document.getElementById("myModal");
-
-  // Get the image and insert it inside the modal - use its "alt" text as a caption
-  var img = document.getElementById("myImg");
-  var modalImg = document.getElementById("img01");
-  var captionText = document.getElementById("caption");
-  img.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
-  }
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-  </script>
 </head>
 
 <body class="is-responsive">
@@ -136,7 +114,16 @@
               </div>
               <li style="padding-bottom: 1em"><u>A high lateral resolution:</u>Horizontal resolution depends on the profile depth and ship speed. This parameter space was explored during a field test on the R Armstrong in 2019 and showed that sub-kilometer resolution can be achived at up to 7 knots for shallower profiles.</li>
               <div>
-                <img src="images/resolution.jpg" style="max-width: 600px; border: 1px solid #d4d4d4; margin-left: 100px">
+                <img class="myImg" src="images/resolution.jpg" alt="" style="max-width: 600px; border: 1px solid #d4d4d4; margin-left: 100px">
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                  <!-- The Close Button -->
+                  <span class="close">&times;</span>
+                  <!-- Modal Content (The Image) -->
+                  <img class="modal-content" id="img01">
+                  <!-- Modal Caption (Image Text) -->
+                  <div id="caption"></div>
+                </div>
               </div>
             </ul>
 
@@ -154,16 +141,15 @@
               <li>The EcoCTD is then spooled back to the ship by starting the winch. Once the EcoCTD is dragging a few meters away from the stern of the ship, the winch is stopped, and the break is once again released to start a new profile.</li>
               <li>When the EcoCTD needs to be recovered, the instrument can be slowly lifted up to the back deck, watching wave action to avoid hitting the stern of the ship with the EcoCTD. </li>
             </ol>
-            <div>
-              <img id="myImg" src="images/EcoCTD_diagram.png" style="max-width: 600px; border: 1px solid #d4d4d4; margin-left: 100px">
-              <!-- The Modal -->
-              <div id="myModal" class="modal">
-                <!-- The Close Button -->
-                <span class="close">&times;</span>
-                <!-- Modal Content (The Image) -->
-                <img class="modal-content" id="img01">
-                <!-- Modal Caption (Image Text) -->
-                <div id="caption"></div>
+
+              <div class="container1">
+                <img src="images/EcoCTD_diagram.png" onclick="onClick(this)" class="modal-hover-opacity">
+              </div>
+
+            <div id="modal01" class="modal" onclick="this.style.display='none'">
+              <span class="close">&times;</span>
+              <div class="modal-content">
+                <img id="img01">
               </div>
             </div>
           </div>
@@ -187,6 +173,13 @@
       </div>
     </div>
   </footer>
+
+  <script>
+  function onClick(element) {
+    document.getElementById("modal01").style.display = "block";
+    document.getElementById("img01").src = element.src;
+}
+  </script>
 
 </body>
 
